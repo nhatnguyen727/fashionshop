@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "category")
 public class Category {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String name;

@@ -26,7 +26,7 @@ public class AdminServiceImpl implements AdminService {
 	public Admin save(AdminDto adminDto) {
 		Admin admin = AdminMapper.INSTANCE.toEntity(adminDto);
 		//admin.setIdrole(rolerepository.findById(adminDto.getIdrole().getId()).get());
-		admin.setIdrole(rolerepository.findById((int)adminDto.getIdrole().getId()).get());
+		admin.setIdrole(rolerepository.findById(adminDto.getIdrole().getId()).get());
 		return adminRepository.save(admin);
 	}
 

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "admin")
 public class Admin {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String password;

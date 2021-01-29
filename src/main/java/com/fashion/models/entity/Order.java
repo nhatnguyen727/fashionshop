@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "orders")
 public class Order {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "iduser", foreignKey = @ForeignKey(name = "iduser"))

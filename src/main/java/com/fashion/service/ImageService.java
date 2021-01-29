@@ -3,7 +3,9 @@ package com.fashion.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.fashion.models.dto.ImageDto;
 import com.fashion.models.entity.Image;
+import com.fashion.models.entity.Product;
 
 public interface ImageService {
 
@@ -13,6 +15,12 @@ public interface ImageService {
 
 	List<Image> findAll();
 
-	<S extends Image> S save(S entity);
+	Image save(ImageDto dto);
+
+	List<Image> findAllById(Iterable<Integer> ids);
+
+
+
+
 
 }

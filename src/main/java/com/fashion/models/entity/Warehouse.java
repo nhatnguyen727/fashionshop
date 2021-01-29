@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 public class Warehouse {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	private int imported;

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "user")
 public class User {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String username;
 	private String password;

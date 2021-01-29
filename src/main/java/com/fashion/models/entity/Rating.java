@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "rating")
 public class Rating {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int star;
 	@Column(columnDefinition = "nvarchar(255)")

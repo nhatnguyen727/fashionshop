@@ -5,6 +5,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
@@ -13,17 +14,17 @@ import javax.validation.constraints.NotNull;
 @Embeddable
 public class OrderDetailIdentity implements Serializable {
 	@NotNull
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@NotNull
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idpro", foreignKey = @ForeignKey(name = "idpro"))
 	private Product idpro;
 	
 	@NotNull
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idord", foreignKey = @ForeignKey(name = "idord"))
 	private Order idord;

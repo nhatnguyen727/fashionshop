@@ -23,7 +23,7 @@ public class ProductDto {
 	private SupplierDto idsup;
 	private String name;
 	private double price_enter;
-	private double price_sales;
+	private double price_sale;
 	private String unit;
 
 	@JsonCreator
@@ -87,12 +87,14 @@ public class ProductDto {
 		this.price_enter = price_enter;
 	}
 
-	public double getPrice_sales() {
-		return price_sales;
+	
+
+	public double getPrice_sale() {
+		return price_sale;
 	}
 
-	public void setPrice_sales(double price_sales) {
-		this.price_sales = price_sales;
+	public void setPrice_sale(double price_sale) {
+		this.price_sale = price_sale;
 	}
 
 	public String getUnit() {
