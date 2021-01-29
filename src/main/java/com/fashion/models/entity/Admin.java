@@ -1,39 +1,51 @@
 package com.fashion.models.entity;
-import java.io.Serializable;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "admin")
 public class Admin {
 	@Id
 	@GeneratedValue
-	private int AdminID;
-	private String Admin_name;
-	private String Password;
+	private int id;
+	private String name;
+	private String password;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "role_pk", foreignKey = @ForeignKey(name = "role_pk"))
-	private Roles RoleID;
+	@JoinColumn(name = "idrole", foreignKey = @ForeignKey(name = "idrole"))
+	private Role idrole;
 	
-	public String getAdmin_name() {
-		return Admin_name;
+	public int getId() {
+		return id;
 	}
-	public void setAdmin_name(String admin_name) {
-		Admin_name = admin_name;
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
-	public Roles getRoleID() {
-		return RoleID;
+	public Role getIdrole() {
+		return idrole;
 	}
-	public void setRoleID(Roles roleID) {
-		RoleID = roleID;
+	public void setIdrole(Role idrole) {
+		this.idrole = idrole;
 	}
+	
 	
 	
 }
