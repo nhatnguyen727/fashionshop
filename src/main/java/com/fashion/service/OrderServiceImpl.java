@@ -6,17 +6,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fashion.models.dto.OrderDto;
 import com.fashion.models.entity.Order;
+import com.fashion.models.mapper.OrderMapper;
 import com.fashion.repositories.OrderRepository;
+import com.fashion.repositories.ProductRepository;
+import com.fashion.repositories.UserRepository;
 
 @Service
 public class OrderServiceImpl implements OrderService{
 	@Autowired
 	private OrderRepository repository;
-
+	@Autowired
+	private UserRepository userrepository;
 	@Override
-	public <S extends Order> S save(S entity) {
-		return repository.save(entity);
+	public Order save(OrderDto dto) {
+		Order order = OrderMapper.INSTANCE.toEntity(dto);
+		order.setIduser(userrepository.findById(dto.getIduser().getId()).get());
+		return repository.save(order);
 	}
 
 	@Override

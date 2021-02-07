@@ -40,6 +40,8 @@ public class ProductController {
 			listProducts.forEach(p->{
 				if(n==p.getId()) {
 					System.out.println("image id"+n+ "Product name :" + p.getId());
+					
+					
 				}
 			});
 			});

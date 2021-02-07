@@ -23,7 +23,7 @@ public class UserDto {
 	private String phone;
 
 	@JsonCreator
-	public UserDto(@JsonProperty("id_") int id) {
+	public UserDto(@JsonProperty("id_user") int id) {
 		this.id = id;
 	}
 

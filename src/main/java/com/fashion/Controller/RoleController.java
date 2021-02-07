@@ -44,7 +44,7 @@ public class RoleController {
 	}
 	@PutMapping("/role/{id}/upd")
 	public ResponseEntity<String> update(@PathVariable("id") @Min(1) int id,@RequestBody RoleDto roleDto) {
-		Role role = roleService.findById(id).orElseThrow(() -> new RoleNotFoundException());
+		Role role = roleService.findById(id).orElseThrow(() -> new RoleNotFoundException("No Role with "+ id));
 		
 		Role newroles = RoleMapper.INSTANCE.toEntity(roleDto);
 		newroles.setId(role.getId());
@@ -55,7 +55,7 @@ public class RoleController {
 	
 	@GetMapping("/role/{id}/del")
 	public ResponseEntity<String> delete(@PathVariable(name = "id") @Min(1) Integer id){
-		Role role = roleService.findById(id).orElseThrow(() -> new RoleNotFoundException());
+		Role role = roleService.findById(id).orElseThrow(() -> new RoleNotFoundException("No Role with "+ id));
 		roleService.deleteById(role.getId());
 		return ResponseEntity.ok().body("Role with " + id + " deleted!!!!!");
 	}

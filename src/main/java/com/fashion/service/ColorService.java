@@ -3,6 +3,7 @@ package com.fashion.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.fashion.models.dto.ColorDto;
 import com.fashion.models.entity.Color;
 
 public interface ColorService {
@@ -13,6 +14,7 @@ public interface ColorService {
 
 	List<Color> findAll();
 
-	<S extends Color> S save(S entity);
+	Color save(ColorDto dto);
+
 
 }

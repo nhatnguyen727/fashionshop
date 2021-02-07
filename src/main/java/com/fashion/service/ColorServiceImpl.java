@@ -6,17 +6,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fashion.models.dto.ColorDto;
 import com.fashion.models.entity.Color;
+import com.fashion.models.mapper.ColorMapper;
 import com.fashion.repositories.ColorRepository;
+import com.fashion.repositories.ProductRepository;
 
 @Service
 public class ColorServiceImpl implements ColorService{
 	@Autowired
 	private ColorRepository repository;
-
+	@Autowired
+	private ProductRepository proRepository;
+	
 	@Override
-	public <S extends Color> S save(S entity) {
-		return repository.save(entity);
+	public Color save(ColorDto dto) {
+		Color color = ColorMapper.INSTANCE.toEntity(dto);
+		color.setIdpro(proRepository.findById(dto.getIdpro().getId()).get());
+		return repository.save(color);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.fashion.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.fashion.models.dto.RatingDto;
 import com.fashion.models.entity.Rating;
 
 public interface RatingService {
@@ -13,6 +14,7 @@ public interface RatingService {
 
 	List<Rating> findAll();
 
-	<S extends Rating> S save(S entity);
+	Rating save(RatingDto dto);
+
 
 }
