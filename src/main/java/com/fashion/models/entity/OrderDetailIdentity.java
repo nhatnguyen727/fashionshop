@@ -19,13 +19,13 @@ public class OrderDetailIdentity implements Serializable {
 
 	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idpro", foreignKey = @ForeignKey(name = "idpro"))
 	private Product idpro;
 	
 	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idord", foreignKey = @ForeignKey(name = "idord"))
 	private Order idord;
 

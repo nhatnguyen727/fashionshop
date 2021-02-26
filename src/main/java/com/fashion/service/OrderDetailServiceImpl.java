@@ -26,8 +26,7 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	private OrderRepository ordRepository;
 	@Override
 	public OrderDetail save(OrderDetailDto dto) {
-		OrderDetailIdentity identity;
-//		identity.set
+		
 		OrderDetail detail = OrderDetailMapper.INSTANCE.toEntity(dto);
 		
 		

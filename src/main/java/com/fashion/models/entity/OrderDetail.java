@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class OrderDetail {
 	@EmbeddedId
 	OrderDetailIdentity detailIdentity;
+	
 	private int quantity;
 
 	
@@ -26,5 +27,10 @@ public class OrderDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public OrderDetailIdentity getDetailIdentity() {
+		return detailIdentity;
+	}
+	
 
 }
