@@ -40,8 +40,7 @@ public class OrderDetailController {
 			list.forEach(p->{
 				if(n==p.getId()) {
 					System.out.println("Product id"+n+ "OrderDetail name :" + p.getId());
-					
-					
+										
 				}
 			});
 			});
