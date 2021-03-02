@@ -22,14 +22,14 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	private OrderDetailRepository repository;
 	@Autowired
 	private ProductRepository proRepository;
-	@Autowired 
+	@Autowired
 	private OrderRepository ordRepository;
 	@Override
 	public OrderDetail save(OrderDetailDto dto) {
 		
 		OrderDetail detail = OrderDetailMapper.INSTANCE.toEntity(dto);
-		
-		
+		detail.setDetailIdentity(proRepository.findById(dto.getIdpro().getId()).get());
+		detail.setDetailIdentity(ordRepository.findById(dto.getIdord().getId()).get());
 		return repository.save(detail);
 	}
 

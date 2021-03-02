@@ -16,18 +16,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fashion.Exception.OrderNotFoundException;
 import com.fashion.models.dto.OrderDetailDto;
+import com.fashion.models.entity.Image;
 import com.fashion.models.entity.OrderDetail;
 import com.fashion.models.entity.OrderDetailIdentity;
+import com.fashion.models.entity.Product;
 import com.fashion.models.mapper.OrderDetailMapper;
 import com.fashion.service.OrderDetailService;
+import com.fashion.service.ProductService;
 
 @RestController
 public class OrderDetailController {
 	@Autowired
 	private OrderDetailService service;
+	@Autowired
+	private ProductService proservice;
 	@GetMapping("/orderdetails")
 	public List<OrderDetailDto> list(){
 		List<OrderDetail> list= service.findAll();
+		List<Product> listProducts = proservice.findAll();
+		
+		listProducts.stream().map(Product::getId).forEach(n->System.out.println(n.toString()));
+		listProducts.stream().map(Product::getId).forEach(n->{
+			list.forEach(p->{
+				if(n==p.getId()) {
+					System.out.println("Product id"+n+ "OrderDetail name :" + p.getId());
+					
+					
+				}
+			});
+			});
+		
 		if (list.isEmpty()) {
 			return new ArrayList<>();
 		}
