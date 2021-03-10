@@ -19,9 +19,7 @@ public class Product {
 	private double price_sale;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String unit;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idware", foreignKey = @ForeignKey(name = "idware"))
-	private Warehouse idware;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "iddis", foreignKey = @ForeignKey(name = "iddis"))
 	private Discount iddis;
@@ -31,6 +29,8 @@ public class Product {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idsup", foreignKey = @ForeignKey(name = "idsup"))
 	private Supplier idsup;
+	private int amountimport;
+	private int amountsold;
 	public int getId() {
 		return id;
 	}
@@ -61,12 +61,7 @@ public class Product {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-	public Warehouse getIdware() {
-		return idware;
-	}
-	public void setIdware(Warehouse idware) {
-		this.idware = idware;
-	}
+	
 	public Discount getIddis() {
 		return iddis;
 	}
@@ -84,6 +79,18 @@ public class Product {
 	}
 	public void setIdsup(Supplier idsup) {
 		this.idsup = idsup;
+	}
+	public int getAmountimport() {
+		return amountimport;
+	}
+	public void setAmountimport(int amountimport) {
+		this.amountimport = amountimport;
+	}
+	public int getAmountsold() {
+		return amountsold;
+	}
+	public void setAmountsold(int amountsold) {
+		this.amountsold = amountsold;
 	}
 	
 }

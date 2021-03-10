@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fashion.models.dto.ProductDto;
-import com.fashion.models.entity.Category;
 import com.fashion.models.entity.Product;
 import com.fashion.models.mapper.ProductMapper;
 import com.fashion.repositories.CategoryRepository;
 import com.fashion.repositories.DiscountRepository;
 import com.fashion.repositories.ProductRepository;
 import com.fashion.repositories.SupperlierRepository;
-import com.fashion.repositories.WarehouseRepository;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -26,8 +24,7 @@ public class ProductServiceImpl implements ProductService{
 	private DiscountRepository disRepository;
 	@Autowired
 	private SupperlierRepository supRepository;
-	@Autowired 
-	private WarehouseRepository wareRepository;
+
 	
 	@Override
 	public Product save(ProductDto dto) {
@@ -35,7 +32,6 @@ public class ProductServiceImpl implements ProductService{
 		product.setIdcate(cateRepository.findById(dto.getIdcate().getId()).get());
 		product.setIddis(disRepository.findById(dto.getIddis().getId()).get());
 		product.setIdsup(supRepository.findById(dto.getIdsup().getId()).get());
-		product.setIdware(wareRepository.findById(dto.getIdware().getId()).get());
 		return repository.save(product);
 	}
 
@@ -54,12 +50,6 @@ public class ProductServiceImpl implements ProductService{
 		repository.deleteById(id);
 	}
 	
-//	@Override
-//	public List<Product> findByName(String name){
-//		return repository.findByName(name);
-//	}
-//	public boolean existsByUsername(String nameproduct) {
-//		
-//	}
+//
 	
 }

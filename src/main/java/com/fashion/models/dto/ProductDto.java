@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductDto {
 	private int id;
-	private WarehouseDto idware;
 	private DiscountDto iddis;
 	private CategoryDto idcate;
 	private SupplierDto idsup;
@@ -25,7 +24,8 @@ public class ProductDto {
 	private double price_enter;
 	private double price_sale;
 	private String unit;
-
+	private int amountimport;
+	private int amountsold;
 	@JsonCreator
 	public ProductDto(@JsonProperty("id_pro") int id) {
 		this.id = id;
@@ -39,13 +39,7 @@ public class ProductDto {
 		this.id = id;
 	}
 
-	public WarehouseDto getIdware() {
-		return idware;
-	}
-
-	public void setIdware(WarehouseDto idware) {
-		this.idware = idware;
-	}
+	
 
 	public DiscountDto getIddis() {
 		return iddis;
@@ -103,6 +97,22 @@ public class ProductDto {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public int getAmountimport() {
+		return amountimport;
+	}
+
+	public void setAmountimport(int amountimport) {
+		this.amountimport = amountimport;
+	}
+
+	public int getAmountsold() {
+		return amountsold;
+	}
+
+	public void setAmountsold(int amountsold) {
+		this.amountsold = amountsold;
 	}
 
 	

@@ -61,23 +61,6 @@ public class ProductController {
 		}
 		return ProductMapper.INSTANCE.toDtoList(listProducts);
 	}
-//	@GetMapping("/user/username={username}")
-//	public ResponseEntity<User> getByUsername(@PathVariable("username") String username) {
-//		if (userRepo.existsByUsername(username)) {
-//			return new ResponseEntity<>(userRepo.findByUsername(username), HttpStatus.FOUND);
-//		} else {
-//			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-//		}
-//	}
-	@GetMapping("/product/nameproduct= {nameproduct}")
-//	public ResponseEntity<Product> GetFindByName(@PathVariable("nameproduct") String nameproduct){
-//		List<Product> list = service.findByName(name);
-//		return ProductMapper.INSTANCE.toDtoList(list);
-//		if(service.findByName(nameproduct)) {
-//			return new ResponseEntity<>(service.fin)
-//		}
-//		}
-	
 	@PostMapping("/admin/product")
 	public ProductDto insert(@RequestBody ProductDto dto) {
 		Product product = service.save(dto);
