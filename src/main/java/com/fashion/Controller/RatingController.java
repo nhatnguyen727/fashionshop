@@ -19,6 +19,7 @@ import com.fashion.service.RatingService;
 public class RatingController {
 	@Autowired
 	private RatingService ratingService;
+
 	@CrossOrigin
 	@GetMapping("/ratings")
 	public List<RatingDto> list() {
@@ -29,12 +30,14 @@ public class RatingController {
 		return RatingMapper.INSTANCE.toDtoList(list);
 	}
 
+	@CrossOrigin
 	@PostMapping("/rating")
 	public RatingDto insert(@RequestBody RatingDto dto) {
 		Rating rating = ratingService.save(dto);
 		return RatingMapper.INSTANCE.toDto(rating);
 	}
 
+	@CrossOrigin
 	@PutMapping("/rating/{id}/upd")
 	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody RatingDto dto) {
 		Rating rating = ratingService.findById(id)
@@ -45,6 +48,7 @@ public class RatingController {
 		return ResponseEntity.ok().body("Rating with " + id + " updated!!!");
 	}
 
+	@CrossOrigin
 	@GetMapping("/rating/{id}/del")
 	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
 		Rating rating = ratingService.findById(id)

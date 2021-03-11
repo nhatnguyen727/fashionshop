@@ -25,35 +25,40 @@ import com.fashion.service.SizeService;
 public class SizeControllor {
 	@Autowired
 	SizeService service;
+
 	@CrossOrigin
-	@GetMapping("/sizes") 
-	public List<SizeDto> list(){ 
+	@GetMapping("/sizes")
+	public List<SizeDto> list() {
 		List<Size> list = service.findAll();
-		if(list.isEmpty()) {
+		if (list.isEmpty()) {
 			return new ArrayList<>();
 		}
 		return SizeMapper.INSTANCE.toDtoList(list);
 	}
-	
+
+	@CrossOrigin
 	@PostMapping("/admin/size")
 	public SizeDto insert(@RequestBody SizeDto dto) {
 		Size size = service.save(dto);
 		return SizeMapper.INSTANCE.toDto(size);
 	}
-	
+
+	@CrossOrigin
 	@PutMapping("/admin/size/{id}/upd")
-	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody SizeDto dto){
-		Size size = service.findById(id).orElseThrow(() -> new SizeNotFoundException("No size with "+id));
+	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody SizeDto dto) {
+		Size size = service.findById(id).orElseThrow(() -> new SizeNotFoundException("No size with " + id));
 		Size nSize = SizeMapper.INSTANCE.toEntity(dto);
 		nSize.setId(size.getId());
 		service.save(SizeMapper.INSTANCE.toDto(nSize));
-		return ResponseEntity.ok().body("Size with "+ id+ "updated!!!!");
+		return ResponseEntity.ok().body("Size with " + id + "updated!!!!");
 	}
+
+	@CrossOrigin
 	@GetMapping("/admin/size/{id}/del")
-	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id){
-		Size size = service.findById(id).orElseThrow(() -> new SizeNotFoundException("No size with "+id));
+	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
+		Size size = service.findById(id).orElseThrow(() -> new SizeNotFoundException("No size with " + id));
 		service.deleteById(size.getId());
-		return ResponseEntity.ok().body("Size with "+ id+ "deleted!!!!");
+		return ResponseEntity.ok().body("Size with " + id + "deleted!!!!");
 
 	}
 }

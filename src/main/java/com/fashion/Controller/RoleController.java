@@ -25,7 +25,7 @@ import com.fashion.service.RoleService;
 public class RoleController {
 	@Autowired
 	RoleService roleService;
-	
+
 	@CrossOrigin
 	@GetMapping("/admin/roles")
 	public List<RoleDto> list() {
@@ -36,27 +36,31 @@ public class RoleController {
 		return RoleMapper.INSTANCE.toDtoList(list);
 
 	}
-	
+
+	@CrossOrigin
 	@PostMapping("/admin/role")
 	public RoleDto insert(@RequestBody RoleDto roleDto) {
 		Role role = roleService.save(roleDto);
 		return RoleMapper.INSTANCE.toDto(role);
-		
+
 	}
+
+	@CrossOrigin
 	@PutMapping("/admin/role/{id}/upd")
-	public ResponseEntity<String> update(@PathVariable("id") @Min(1) int id,@RequestBody RoleDto roleDto) {
-		Role role = roleService.findById(id).orElseThrow(() -> new RoleNotFoundException("No Role with "+ id));
-		
+	public ResponseEntity<String> update(@PathVariable("id") @Min(1) int id, @RequestBody RoleDto roleDto) {
+		Role role = roleService.findById(id).orElseThrow(() -> new RoleNotFoundException("No Role with " + id));
+
 		Role newroles = RoleMapper.INSTANCE.toEntity(roleDto);
 		newroles.setId(role.getId());
-		
+
 		roleService.save(RoleMapper.INSTANCE.toDto(newroles));
 		return ResponseEntity.ok().body("Role with " + id + " updated!!!!!");
 	}
-	
+
+	@CrossOrigin
 	@GetMapping("/admin/role/{id}/del")
-	public ResponseEntity<String> delete(@PathVariable(name = "id") @Min(1) Integer id){
-		Role role = roleService.findById(id).orElseThrow(() -> new RoleNotFoundException("No Role with "+ id));
+	public ResponseEntity<String> delete(@PathVariable(name = "id") @Min(1) Integer id) {
+		Role role = roleService.findById(id).orElseThrow(() -> new RoleNotFoundException("No Role with " + id));
 		roleService.deleteById(role.getId());
 		return ResponseEntity.ok().body("Role with " + id + " deleted!!!!!");
 	}

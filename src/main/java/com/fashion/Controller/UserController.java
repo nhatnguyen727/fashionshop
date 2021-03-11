@@ -25,6 +25,7 @@ import com.fashion.service.UserService;
 public class UserController {
 	@Autowired
 	UserService service;
+
 	@CrossOrigin
 	@GetMapping("/users")
 	public List<UserDto> list() {
@@ -35,26 +36,29 @@ public class UserController {
 		return UserMapper.INSTANCE.toDtoList(list);
 
 	}
-	
+
+	@CrossOrigin
 	@PostMapping("/user")
 	public UserDto insert(@RequestBody UserDto dto) {
 		User user = service.save(dto);
 		return UserMapper.INSTANCE.toDto(user);
 	}
-	
+
+	@CrossOrigin
 	@PutMapping("/user/{id}/upd")
-	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody UserDto dto){
-		User user = service.findById(id).orElseThrow(()-> new UserNotFoundException());
+	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody UserDto dto) {
+		User user = service.findById(id).orElseThrow(() -> new UserNotFoundException());
 		User nUser = UserMapper.INSTANCE.toEntity(dto);
 		nUser.setId(dto.getId());
 		service.save(UserMapper.INSTANCE.toDto(nUser));
-		return ResponseEntity.ok().body("User with "+ id+" updated!!");
+		return ResponseEntity.ok().body("User with " + id + " updated!!");
 	}
-	
+
+	@CrossOrigin
 	@GetMapping("admin/user/{id}/del")
-	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id){
-		User user = service.findById(id).orElseThrow(()-> new UserNotFoundException());
+	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
+		User user = service.findById(id).orElseThrow(() -> new UserNotFoundException());
 		service.deleteById(user.getId());
-		return ResponseEntity.ok().body("User with "+ id + " deleted!!!");
+		return ResponseEntity.ok().body("User with " + id + " deleted!!!");
 	}
 }

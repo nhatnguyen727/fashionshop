@@ -51,6 +51,7 @@ public class OrderDetailController {
 		return OrderDetailMapper.INSTANCE.toDtoList(list);
 	}
 
+	@CrossOrigin
 	@PostMapping("/orderdetail")
 	public OrderDetailDto insert(@RequestBody OrderDetailDto dto) {
 		OrderDetail detail = service.save(dto);

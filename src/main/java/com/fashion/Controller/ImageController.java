@@ -29,32 +29,34 @@ public class ImageController {
 	ImageService service;
 	@Autowired
 	ProductService proservice;
+
 	@CrossOrigin
 	@GetMapping("/images")
 	public List<ImageDto> list() {
 		List<Image> list = service.findAll();
-//		List<Product> listProducts = proservice.findAll();
-//
-//		listProducts.stream().map(Product::getId).forEach(n -> {
-//			list.forEach(p -> {
-//				if (n == p.getId()) {
-//					
-//
-//				}
-//			});
-//		});
+		List<Product> listProducts = proservice.findAll();
+
+		listProducts.stream().map(Product::getId).forEach(n -> {
+			list.forEach(p -> {
+				if (n == p.getId()) {
+
+				}
+			});
+		});
 		if (list.isEmpty()) {
 			return new ArrayList<>();
 		}
 		return ImageMapper.INSTANCE.toDtoList(list);
 	}
 
+	@CrossOrigin
 	@PostMapping("/admin/image")
 	public ImageDto insert(@RequestBody ImageDto dto) {
 		Image image = service.save(dto);
 		return ImageMapper.INSTANCE.toDto(image);
 	}
 
+	@CrossOrigin
 	@PutMapping("/admin/image/{id}/upd")
 	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody ImageDto dto) {
 		Image image = service.findById(id).orElseThrow(() -> new ImageNotFoundException("No image with " + id));

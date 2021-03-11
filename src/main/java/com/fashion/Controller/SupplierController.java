@@ -25,35 +25,41 @@ import com.fashion.service.SupplierService;
 public class SupplierController {
 	@Autowired
 	SupplierService service;
+
 	@CrossOrigin
 	@GetMapping("suppliers")
-	public List<SupplierDto> list(){
+	public List<SupplierDto> list() {
 		List<Supplier> list = service.findAll();
-		if(list.isEmpty()) {
+		if (list.isEmpty()) {
 			return new ArrayList<>();
 		}
 		return SupplierMapper.INSTANCE.toDtoList(list);
 	}
-	
+
+	@CrossOrigin
 	@PostMapping("/admin/supplier")
 	public SupplierDto insert(@RequestBody SupplierDto dto) {
 		Supplier supplier = service.save(dto);
 		return SupplierMapper.INSTANCE.toDto(supplier);
 	}
-	
+
+	@CrossOrigin
 	@PutMapping("/admin/supplier/{id}/upd")
-	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody SupplierDto dto){
-		Supplier supplier = service.findById(id).orElseThrow(() -> new SupplierNotFoundException("No supplier with " + id ));
+	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody SupplierDto dto) {
+		Supplier supplier = service.findById(id)
+				.orElseThrow(() -> new SupplierNotFoundException("No supplier with " + id));
 		Supplier nSupplier = SupplierMapper.INSTANCE.toEntity(dto);
 		nSupplier.setId(dto.getId());
 		service.save(SupplierMapper.INSTANCE.toDto(nSupplier));
-		return ResponseEntity.ok().body("Supplier with "+ id+ " updated");
+		return ResponseEntity.ok().body("Supplier with " + id + " updated");
 	}
-	
+
+	@CrossOrigin
 	@GetMapping("/admin/supplier/{id}/del")
-	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id){
-		Supplier supplier = service.findById(id).orElseThrow(() -> new SupplierNotFoundException("No supplier with " + id ));
+	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
+		Supplier supplier = service.findById(id)
+				.orElseThrow(() -> new SupplierNotFoundException("No supplier with " + id));
 		service.deleteById(id);
-		return ResponseEntity.ok().body("Supplier with "+ id+ " deleted");
+		return ResponseEntity.ok().body("Supplier with " + id + " deleted");
 	}
 }

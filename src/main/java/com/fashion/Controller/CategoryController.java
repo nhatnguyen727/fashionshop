@@ -25,6 +25,7 @@ import com.fashion.service.CategoryService;
 public class CategoryController {
 	@Autowired
 	CategoryService service;
+
 	@CrossOrigin
 	@GetMapping("/categories")
 	public List<CategoryDto> list() {
@@ -35,12 +36,14 @@ public class CategoryController {
 		return CategoryMapper.INSTANCE.toDtoList(list);
 	}
 
+	@CrossOrigin
 	@PostMapping("/admin/category")
 	public CategoryDto insert(@RequestBody CategoryDto dto) {
 		Category category = service.save(dto);
 		return CategoryMapper.INSTANCE.toDto(category);
 	}
 
+	@CrossOrigin
 	@PutMapping("/admin/categoty/{id}/upd")
 	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody CategoryDto dto) {
 		Category category = service.findById(id).orElseThrow(() -> new CategoryNotFoundException());
@@ -50,10 +53,11 @@ public class CategoryController {
 		return ResponseEntity.ok().body("Category with " + id + " updated!!!");
 	}
 
+	@CrossOrigin
 	@GetMapping("/admin/category/{id}/del")
-	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id){
+	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
 		Category category = service.findById(id).orElseThrow(() -> new CategoryNotFoundException());
 		service.deleteById(category.getId());
-		return ResponseEntity.ok().body("Category with "+ id + " deleted!!!");
+		return ResponseEntity.ok().body("Category with " + id + " deleted!!!");
 	}
 }

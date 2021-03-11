@@ -24,33 +24,40 @@ import com.fashion.service.ColorService;
 @RestController
 public class ColorController {
 	@Autowired
-	private ColorService  colorService;
+	private ColorService colorService;
+
 	@CrossOrigin
 	@GetMapping("/colors")
-	public List<ColorDto> list(){
+	public List<ColorDto> list() {
 		List<Color> list = colorService.findAll();
 		if (list.isEmpty()) {
 			return new ArrayList<>();
 		}
 		return ColorMapper.INSTANCE.toDtoList(list);
 	}
+
+	@CrossOrigin
 	@PostMapping("/admin/color")
 	public ColorDto insert(@RequestBody ColorDto dto) {
 		Color color = colorService.save(dto);
 		return ColorMapper.INSTANCE.toDto(color);
 	}
+
+	@CrossOrigin
 	@PutMapping("/admin/color/{id}/upd")
-	public ResponseEntity<String> update(@PathVariable("id")@Min(1) Integer id, @RequestBody ColorDto dto){
-		Color color = colorService.findById(id).orElseThrow(() -> new ColorNotFoundException("No color with "+ id));
+	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody ColorDto dto) {
+		Color color = colorService.findById(id).orElseThrow(() -> new ColorNotFoundException("No color with " + id));
 		Color nColor = ColorMapper.INSTANCE.toEntity(dto);
 		nColor.setId(color.getId());
 		colorService.save(ColorMapper.INSTANCE.toDto(nColor));
-		return ResponseEntity.ok().body("Color with "+id+" updated!!!");
+		return ResponseEntity.ok().body("Color with " + id + " updated!!!");
 	}
+
+	@CrossOrigin
 	@GetMapping("/admin/color/{id}/del")
-	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id){
-		Color color = colorService.findById(id).orElseThrow(() -> new ColorNotFoundException("No color with "+ id));
+	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
+		Color color = colorService.findById(id).orElseThrow(() -> new ColorNotFoundException("No color with " + id));
 		colorService.deleteById(color.getId());
-		return ResponseEntity.ok().body("Color with "+id+" deleted!!!");
+		return ResponseEntity.ok().body("Color with " + id + " deleted!!!");
 	}
 }

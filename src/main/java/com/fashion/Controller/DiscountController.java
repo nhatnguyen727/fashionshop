@@ -25,35 +25,39 @@ import com.fashion.service.DiscountService;
 public class DiscountController {
 	@Autowired
 	DiscountService service;
+
 	@CrossOrigin
 	@GetMapping("/discounts")
-	public List<DiscountDto> list(){
+	public List<DiscountDto> list() {
 		List<Discount> list = service.findAll();
 		if (list.isEmpty()) {
 			return new ArrayList<>();
 		}
 		return DiscountMapper.INSTANCE.toDtoList(list);
 	}
-	
+
+	@CrossOrigin
 	@PostMapping("/admin/discount")
 	public DiscountDto insert(@RequestBody DiscountDto dto) {
 		Discount discount = service.save(dto);
 		return DiscountMapper.INSTANCE.toDto(discount);
 	}
-	
+
+	@CrossOrigin
 	@PutMapping("/admin/discount/{id}/upd")
-	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody DiscountDto dto){
+	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody DiscountDto dto) {
 		Discount discount = service.findById(id).orElseThrow(() -> new DiscountNotFoundException());
 		Discount ndiscount = DiscountMapper.INSTANCE.toEntity(dto);
 		ndiscount.setId(discount.getId());
 		service.save(DiscountMapper.INSTANCE.toDto(ndiscount));
-		return ResponseEntity.ok().body("Discount with "+ id+ " updated!!");
+		return ResponseEntity.ok().body("Discount with " + id + " updated!!");
 	}
-	
+
+	@CrossOrigin
 	@GetMapping("/admin/discount/{id}/del")
-	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id){
+	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
 		Discount discount = service.findById(id).orElseThrow(() -> new DiscountNotFoundException());
 		service.deleteById(discount.getId());
-		return ResponseEntity.ok().body("Discount with "+ id+ " deleted!!");
+		return ResponseEntity.ok().body("Discount with " + id + " deleted!!");
 	}
 }
