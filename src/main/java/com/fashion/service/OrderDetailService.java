@@ -11,6 +11,10 @@ public interface OrderDetailService {
 
 	OrderDetail save(OrderDetailDto dto);
 
+	List<Object> listMonthlyReport();
+
+	List<Object> listWeeklReport();
+
 
 
 }

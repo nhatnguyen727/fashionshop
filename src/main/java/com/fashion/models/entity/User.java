@@ -18,6 +18,9 @@ public class User {
 	@Column(columnDefinition = "nvarchar(255)")
 	private String address;
 	private String phone;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idrole", foreignKey = @ForeignKey(name = "idrole"))
+	private Role idrole;
 	public int getId() {
 		return id;
 	}
@@ -48,5 +51,12 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public Role getIdrole() {
+		return idrole;
+	}
+	public void setIdrole(Role idrole) {
+		this.idrole = idrole;
+	}
+	
 	
 }

@@ -45,6 +45,17 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	public void deleteById(Integer id) {
 		repository.deleteById(id);
 	}
+
+	@Override
+	public List<Object> listMonthlyReport() {
+		return repository.monthlyReport();
+	}
+
+	@Override
+	public List<Object> listWeeklReport() {
+		return repository.weeklReport();
+	}
+	
 	
 	
 

@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,7 +59,7 @@ public class RoleController {
 	}
 
 	@CrossOrigin
-	@GetMapping("/admin/role/{id}/del")
+	@DeleteMapping("/admin/role/{id}/del")
 	public ResponseEntity<String> delete(@PathVariable(name = "id") @Min(1) Integer id) {
 		Role role = roleService.findById(id).orElseThrow(() -> new RoleNotFoundException("No Role with " + id));
 		roleService.deleteById(role.getId());

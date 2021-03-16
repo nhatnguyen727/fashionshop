@@ -48,7 +48,7 @@ public class OrderController {
 	}
 
 	@CrossOrigin
-	@GetMapping("/order/{id}/del")
+	@DeleteMapping("/order/{id}/del")
 	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
 		Order order = orderService.findById(id).orElseThrow(() -> new OrderNotFoundException("No order with " + id));
 		orderService.deleteById(order.getId());

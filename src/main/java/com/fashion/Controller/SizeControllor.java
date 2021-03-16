@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,7 +55,7 @@ public class SizeControllor {
 	}
 
 	@CrossOrigin
-	@GetMapping("/admin/size/{id}/del")
+	@DeleteMapping("/admin/size/{id}/del")
 	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
 		Size size = service.findById(id).orElseThrow(() -> new SizeNotFoundException("No size with " + id));
 		service.deleteById(size.getId());

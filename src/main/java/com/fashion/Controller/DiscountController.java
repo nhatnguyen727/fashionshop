@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +47,7 @@ public class DiscountController {
 	@CrossOrigin
 	@PutMapping("/admin/discount/{id}/upd")
 	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody DiscountDto dto) {
-		Discount discount = service.findById(id).orElseThrow(() -> new DiscountNotFoundException());
+		Discount discount = service.findById(id).orElseThrow(() -> new DiscountNotFoundException("No discount with " + id));
 		Discount ndiscount = DiscountMapper.INSTANCE.toEntity(dto);
 		ndiscount.setId(discount.getId());
 		service.save(DiscountMapper.INSTANCE.toDto(ndiscount));
@@ -54,9 +55,9 @@ public class DiscountController {
 	}
 
 	@CrossOrigin
-	@GetMapping("/admin/discount/{id}/del")
+	@DeleteMapping("/admin/discount/{id}/del")
 	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
-		Discount discount = service.findById(id).orElseThrow(() -> new DiscountNotFoundException());
+		Discount discount = service.findById(id).orElseThrow(() -> new DiscountNotFoundException("No discount with " + id));
 		service.deleteById(discount.getId());
 		return ResponseEntity.ok().body("Discount with " + id + " deleted!!");
 	}

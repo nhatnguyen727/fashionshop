@@ -22,6 +22,8 @@ public class UserDto {
 	private String address;
 	private String phone;
 
+	private RoleDto idrole;
+
 	@JsonCreator
 	public UserDto(@JsonProperty("id_user") int id) {
 		this.id = id;
@@ -67,4 +69,13 @@ public class UserDto {
 		this.phone = phone;
 	}
 
+	public RoleDto getIdrole() {
+		return idrole;
+	}
+
+	public void setIdrole(RoleDto idrole) {
+		this.idrole = idrole;
+	}
+
+	
 }

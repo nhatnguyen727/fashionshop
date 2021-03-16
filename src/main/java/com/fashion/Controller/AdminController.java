@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,7 +48,7 @@ public class AdminController {
 	@CrossOrigin
 	@PutMapping("/admin/{id}/upd")
 	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody AdminDto adminDto) {
-		Admin admin = adminService.findById(id).orElseThrow(() -> new AdminNotFoundException());
+		Admin admin = adminService.findById(id).orElseThrow(() -> new AdminNotFoundException("No admin with " + id));
 		Admin newadmin = AdminMapper.INSTANCE.toEntity(adminDto);
 		newadmin.setId(admin.getId());
 		adminService.save(AdminMapper.INSTANCE.toDto(newadmin));
@@ -55,9 +56,9 @@ public class AdminController {
 	}
 
 	@CrossOrigin
-	@GetMapping("/admin/{id}/del")
+	@DeleteMapping("/admin/{id}/del")
 	public ResponseEntity<String> delete(@PathVariable(name = "id") int id) {
-		Admin admin = adminService.findById(id).orElseThrow(() -> new AdminNotFoundException());
+		Admin admin = adminService.findById(id).orElseThrow(() -> new AdminNotFoundException("No admin with " + id));
 		adminService.deleteById(admin.getId());
 		return ResponseEntity.ok().body("Admin with " + id + " deleted!!!");
 

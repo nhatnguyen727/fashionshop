@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,17 +48,17 @@ public class UserController {
 	@CrossOrigin
 	@PutMapping("/user/{id}/upd")
 	public ResponseEntity<String> update(@PathVariable("id") @Min(1) Integer id, @RequestBody UserDto dto) {
-		User user = service.findById(id).orElseThrow(() -> new UserNotFoundException());
+		User user = service.findById(id).orElseThrow(() -> new UserNotFoundException("No user with " + id));
 		User nUser = UserMapper.INSTANCE.toEntity(dto);
-		nUser.setId(dto.getId());
+		nUser.setId(user.getId());
 		service.save(UserMapper.INSTANCE.toDto(nUser));
 		return ResponseEntity.ok().body("User with " + id + " updated!!");
 	}
 
 	@CrossOrigin
-	@GetMapping("admin/user/{id}/del")
+	@DeleteMapping("admin/user/{id}/del")
 	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
-		User user = service.findById(id).orElseThrow(() -> new UserNotFoundException());
+		User user = service.findById(id).orElseThrow(() -> new UserNotFoundException("No user with " + id));
 		service.deleteById(user.getId());
 		return ResponseEntity.ok().body("User with " + id + " deleted!!!");
 	}

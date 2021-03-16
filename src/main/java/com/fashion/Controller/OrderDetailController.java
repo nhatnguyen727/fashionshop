@@ -58,4 +58,30 @@ public class OrderDetailController {
 		return OrderDetailMapper.INSTANCE.toDto(detail);
 	}
 
+	@CrossOrigin
+	@GetMapping("/orderdetail/month")
+	public List<Object> listMonth() {
+
+		List<Object> list = service.listMonthlyReport();
+
+		if (list.isEmpty()) {
+			return new ArrayList<>();
+		}
+		return list;
+
+	}
+
+	@CrossOrigin
+	@GetMapping("/orderdetail/week")
+	public List<Object> listWeek() {
+
+		List<Object> list = service.listWeeklReport();
+
+		if (list.isEmpty()) {
+			return new ArrayList<>();
+		}
+		return list;
+
+	}
+
 }

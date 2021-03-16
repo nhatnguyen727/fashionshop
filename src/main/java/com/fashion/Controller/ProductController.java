@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -78,10 +79,10 @@ public class ProductController {
 	}
 
 	@CrossOrigin
-	@GetMapping("/admin/product/{id}/del")
+	@DeleteMapping("/admin/product/{id}/del")
 	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
 		Product pro = service.findById(id).orElseThrow(() -> new ProductNotFoundException("No Product with " + id));
-		service.deleteById(id);
+		service.deleteById(pro.getId());
 		return ResponseEntity.ok().body("Product with " + id + " deleted!!!");
 	}
 

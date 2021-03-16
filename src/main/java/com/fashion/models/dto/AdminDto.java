@@ -17,7 +17,7 @@ public class AdminDto{
 	private String name;
 	private String password;
 	
-	private RoleDto idrole;
+	
 
 	public int getId() {
 		return id;
@@ -43,13 +43,7 @@ public class AdminDto{
 		this.password = password;
 	}
 
-	public RoleDto getIdrole() {
-		return idrole;
-	}
-
-	public void setIdrole(RoleDto idrole) {
-		this.idrole = idrole;
-	}
+	
 
 	
 	

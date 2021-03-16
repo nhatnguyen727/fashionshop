@@ -17,9 +17,7 @@ public class Admin {
 	private int id;
 	private String name;
 	private String password;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idrole", foreignKey = @ForeignKey(name = "idrole"))
-	private Role idrole;
+	
 	
 	public int getId() {
 		return id;
@@ -39,12 +37,7 @@ public class Admin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Role getIdrole() {
-		return idrole;
-	}
-	public void setIdrole(Role idrole) {
-		this.idrole = idrole;
-	}
+	
 	
 	
 	

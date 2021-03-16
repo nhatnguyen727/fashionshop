@@ -49,7 +49,7 @@ public class RatingController {
 	}
 
 	@CrossOrigin
-	@GetMapping("/rating/{id}/del")
+	@DeleteMapping("/rating/{id}/del")
 	public ResponseEntity<String> delete(@PathVariable("id") @Min(1) Integer id) {
 		Rating rating = ratingService.findById(id)
 				.orElseThrow(() -> new RatingNotFoundException("No rating with " + id));

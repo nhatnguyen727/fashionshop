@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fashion.models.dto.AdminDto;
@@ -13,10 +15,14 @@ import com.fashion.repositories.AdminRepository;
 import com.fashion.repositories.RoleRepository;
 @Service
 public class AdminServiceImpl implements AdminService {
+	
+	AdminRepository adminRepository;
+	PasswordEncoder passEncoder;
 	@Autowired
-	private AdminRepository adminRepository;
-	@Autowired
-	private RoleRepository rolerepository;
+	public void AdminService(AdminRepository adminRepository) {
+		this.adminRepository = adminRepository;
+		this.passEncoder = new BCryptPasswordEncoder();
+	}
 	@Override
 	public List<Admin> findAll() {
 		return adminRepository.findAll();
@@ -24,10 +30,11 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public Admin save(AdminDto adminDto) {
+		String passEncoderString = this.passEncoder.encode(adminDto.getPassword());
+		adminDto.setPassword(passEncoderString);
+		
 		Admin admin = AdminMapper.INSTANCE.toEntity(adminDto);
-		//admin.setIdrole(rolerepository.findById(adminDto.getIdrole().getId()).get());
-		admin.setIdrole(rolerepository.findById(adminDto.getIdrole().getId()).get());
-		return adminRepository.save(admin);
+				return adminRepository.save(admin);
 	}
 
 	@Override
