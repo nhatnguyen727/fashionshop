@@ -15,5 +15,10 @@ public interface AdminService {
 	void deleteById(Integer id);
 
 	Optional<Admin> findById(Integer id);
+
+
+	Object findByUsername(String username, String pass);
+
+	
 	
 }

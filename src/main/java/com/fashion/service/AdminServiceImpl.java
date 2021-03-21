@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,11 +31,11 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public Admin save(AdminDto adminDto) {
-		String passEncoderString = this.passEncoder.encode(adminDto.getPassword());
-		adminDto.setPassword(passEncoderString);
-		
+			
 		Admin admin = AdminMapper.INSTANCE.toEntity(adminDto);
-				return adminRepository.save(admin);
+		admin.setName(adminDto.getName());
+		admin.setPassword(passEncoder.encode(adminDto.getPassword()));
+		return adminRepository.save(admin);
 	}
 
 	@Override
@@ -46,6 +47,12 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteById(Integer id) {
 		adminRepository.deleteById(id);
 	}
+	@Override
+	public Object findByUsername(String username, String pass) {
+		
+		return adminRepository.findByUsername(username, pass);
+	}
+	
 	
 	
 	

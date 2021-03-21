@@ -1,5 +1,7 @@
 package com.fashion.models.entity;
 
+import java.util.Optional;
+
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -34,6 +36,11 @@ public class Role {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Optional<Role> stream() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

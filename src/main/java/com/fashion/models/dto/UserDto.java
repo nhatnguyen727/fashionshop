@@ -1,5 +1,7 @@
 package com.fashion.models.dto;
 
+import java.util.Collection;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -76,6 +78,8 @@ public class UserDto {
 	public void setIdrole(RoleDto idrole) {
 		this.idrole = idrole;
 	}
+
+	
 
 	
 }

@@ -64,9 +64,7 @@ public class OrderDetailController {
 
 		List<Object> list = service.listMonthlyReport();
 
-		if (list.isEmpty()) {
-			return new ArrayList<>();
-		}
+		
 		return list;
 
 	}

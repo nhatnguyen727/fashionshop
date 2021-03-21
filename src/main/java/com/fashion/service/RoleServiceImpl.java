@@ -27,14 +27,18 @@ public class RoleServiceImpl implements RoleService {
 		return repository.save(role);
 	}
 
-	@Override
-	public Optional<Role> findById(Integer id) {
-		return repository.findById(id);
-	}
+//	@Override
+//	public Optional<Role> findById(Integer id) {
+//		return repository.findById(id);
+//	}
 
 	@Override
 	public void deleteById(Integer id) {
 		repository.deleteById(id);
+	}
+
+	public Optional<Role> findById(Integer id) {
+		return repository.findById(id);
 	}
 	
 
